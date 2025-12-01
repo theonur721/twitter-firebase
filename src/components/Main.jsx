@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import TweetForm from "./TweetForm";
-import { onSnapshot, collection } from "firebase/firestore";
+import { onSnapshot, collection, query, orderBy } from "firebase/firestore";
 import { db } from "../firebase/config";
 import Post from "./Post";
 
@@ -9,8 +9,11 @@ const Main = () => {
 
   const tweetsCol = collection(db, "tweets");
   useEffect(() => {
+    // filtreleme ayarlarını tanımlama
+    const queryOptions = query(tweetsCol, orderBy("createdAt", "desc"));
+
     // koleksiyondaki değişiklikleri dinle
-    onSnapshot(tweetsCol, (snapshot) => {
+    onSnapshot(queryOptions, (snapshot) => {
       // canlı tweetleri saklamak için dizi
       const liveTweets = [];
       // snapshot içindeki her dokümanı liveTweets dizisine ekle
@@ -31,7 +34,7 @@ const Main = () => {
 
       {/* atılan Tweet listesi */}
       {tweets?.map((tweet) => (
-        <Post tweet={tweet} />
+        <Post key={tweet.id} tweet={tweet} />
       ))}
     </main>
   );

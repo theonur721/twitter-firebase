@@ -6,8 +6,17 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { FcLike } from "react-icons/fc";
 import { FaRetweet } from "react-icons/fa";
 import { FiShare2 } from "react-icons/fi";
+import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { auth, db } from "../firebase/config";
 
 const Post = ({ tweet }) => {
+  const handleLike = () => {
+    // güncellenecek twitin referansını al
+    const tweetRef = doc(db, "tweets", tweet.id);
+    // aktif kullanıcıyı twitin like dizisine ekle
+    updateDoc(tweetRef, { likes: arrayUnion(auth.currentUser.uid) });
+  };
+
   const username = tweet?.user?.name ? tweet.user.name.toLowerCase() : "userss";
 
   return (
@@ -47,7 +56,10 @@ const Post = ({ tweet }) => {
             <FaRetweet className="text-[18px]" />
           </div>
 
-          <div className="hover:bg-rose-900/20 hover:text-rose-500 p-2 transition rounded-full cursor-pointer flex items-center">
+          <div
+            onClick={handleLike}
+            className="hover:bg-rose-900/20 hover:text-rose-500 p-2 transition rounded-full cursor-pointer flex items-center"
+          >
             <AiOutlineHeart className="text-[18px]" />
           </div>
 
