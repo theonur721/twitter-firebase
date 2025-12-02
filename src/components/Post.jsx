@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import user from "../assets/user.jpg";
 import { BiMessageRounded } from "react-icons/bi";
@@ -6,15 +6,29 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { FcLike } from "react-icons/fc";
 import { FaRetweet } from "react-icons/fa";
 import { FiShare2 } from "react-icons/fi";
-import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../firebase/config";
 
 const Post = ({ tweet }) => {
-  const handleLike = () => {
+  const [isLiked, setIsliked] = useState(false);
+  // kullanıcının tweeti beğenip beğenmediğini kontrol et
+  useEffect(() => {
+    const found = tweet?.likes?.find(
+      (userId) => userId === auth.currentUser.uid
+    );
+    setIsliked(found);
+  }, [tweet]);
+
+  // kullanıcı like butonuna tıkladığında like'lar veya çıkarır
+  const toggleLike = () => {
     // güncellenecek twitin referansını al
     const tweetRef = doc(db, "tweets", tweet.id);
     // aktif kullanıcıyı twitin like dizisine ekle
-    updateDoc(tweetRef, { likes: arrayUnion(auth.currentUser.uid) });
+    updateDoc(tweetRef, {
+      likes: isLiked
+        ? arrayRemove(auth.currentUser.uid)
+        : arrayUnion(auth.currentUser.uid),
+    });
   };
 
   const username = tweet?.user?.name ? tweet.user.name.toLowerCase() : "userss";
@@ -57,10 +71,15 @@ const Post = ({ tweet }) => {
           </div>
 
           <div
-            onClick={handleLike}
+            onClick={toggleLike}
             className="hover:bg-rose-900/20 hover:text-rose-500 p-2 transition rounded-full cursor-pointer flex items-center"
           >
-            <AiOutlineHeart className="text-[18px]" />
+            {isLiked ? (
+              <FcLike className="text-[18px]" />
+            ) : (
+              <AiOutlineHeart className="text-[18px]" />
+            )}
+            {tweet.likes.length > 0 && <span>{tweet.likes.length}</span>}
           </div>
 
           <div className="hover:bg-zinc-800 hover:text-sky-500 p-2 transition rounded-full cursor-pointer flex items-center">
