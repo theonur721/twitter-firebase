@@ -1,6 +1,7 @@
 # 🐦 Twitter Clone — Firebase + React
 
-Kullanıcı girişi, tweet paylaşma ve tweet beğenme gibi temel sosyal medya fonksiyonlarını içerir.
+Bu proje, temel Twitter işlevlerini taklit eden sade ve modern bir sosyal medya uygulamasıdır.  
+Kullanıcı girişi, tweet paylaşma, tweet beğenme, görsel yükleme ve gündem listesi gibi özellikler içerir.
 
 ---
 
@@ -16,19 +17,21 @@ Kullanıcı girişi, tweet paylaşma ve tweet beğenme gibi temel sosyal medya f
 ### 📝 Tweet Paylaşma
 
 - Metin tweet atma
-- Resim yükleme placeholder alanı
-- Tweetleri gerçek zamanlı Firestore’a kaydetme
+- Cloudinary ile görsel yükleme
+- Tweetleri gerçek zamanlı Firestore'a kaydetme
+- Tweet silme (üç nokta menüsünden)
 
 ### ❤️ Tweet Beğenme
 
 - Like / Unlike
 - Anlık Firestore güncellemeleri
+- Beğeni sayısı gösterimi
 
 ### 👤 Kullanıcı Profili Alanı
 
 - Google profil fotoğrafı desteği
 - Kullanıcı adı / etiket alanı
-- Çıkış butonu
+- Çıkış yapma butonu
 
 ### 📌 Gündemler (Aside)
 
@@ -41,7 +44,8 @@ Kullanıcı girişi, tweet paylaşma ve tweet beğenme gibi temel sosyal medya f
 - TailwindCSS ile modern tasarım
 - Dark tema
 - Hover efektleri
-- Responsive grid yapısı
+- Responsive tasarım
+- Twitter benzeri layout (Nav – Feed – Aside)
 
 ---
 
@@ -49,7 +53,9 @@ Kullanıcı girişi, tweet paylaşma ve tweet beğenme gibi temel sosyal medya f
 
 - **React**
 - **Vite**
-- **Firebase (Auth + Firestore)**
+- **Firebase Authentication**
+- **Firebase Firestore**
+- **Cloudinary**
 - **React Router**
 - **React Icons**
 - **TailwindCSS**
@@ -60,4 +66,8 @@ Kullanıcı girişi, tweet paylaşma ve tweet beğenme gibi temel sosyal medya f
 
 ## 🎥 Proje Ekran GIF
 
-![](./src/assets/ekran.gif)
+Aşağıda uygulamanın genel görünümü yer almaktadır:
+
+![Ekran GIF](./src/assets/ekran.gif)
+
+---
