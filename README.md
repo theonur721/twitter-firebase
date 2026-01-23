@@ -39,14 +39,6 @@ Kullanıcı girişi, tweet paylaşma, tweet beğenme, görsel yükleme ve günde
 - Twitter’a benzer modern görünüm
 - Arama alanı
 
-### Arayüz (UI)
-
-- TailwindCSS ile modern tasarım
-- Dark tema
-- Hover efektleri
-- Responsive tasarım
-- Twitter benzeri layout (Nav – Feed – Aside)
-
 ---
 
 ## 🛠️ Kullanılan Teknolojiler
